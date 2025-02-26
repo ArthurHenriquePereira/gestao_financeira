@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão financeira</title>
+    <link rel="stylesheet" href="style_menu.css">
+</head>
+
+<body>
+    <header>
+        <h1>Gestão financeira</h1>
+        <div class="username">
+            Usuário: <span id="username"></span>
+        </div>
+    </header>
+    <div class="content">
+        <div class="expenses">
+            <h2>Despesas</h2>
+            <div>
+                Despesas Fixas: <span id="fixed-expenses">0</span>
+            </div>
+            <div>
+                Despesas Variáveis: <span id="variable-expenses">0</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const username = localStorage.getItem('username');
+        document.getElementById('username').textContent = username || 'Guest';
+    </script>
+</body>
+
+</html>
