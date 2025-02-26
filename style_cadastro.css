@@ -55,3 +55,7 @@ body {
 .register-container a:hover {
     text-decoration: underline;
 }
+
+#username {
+    text-transform: capitalize;
+}

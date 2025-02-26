@@ -12,7 +12,7 @@
     <header>
         <h1>Gestão financeira</h1>
         <div class="username">
-            Usuário: <span id="username"></span>
+            <span id="username"></span>
         </div>
     </header>
     <div class="content">
@@ -30,6 +30,20 @@
     <script>
         const username = localStorage.getItem('username');
         document.getElementById('username').textContent = username || 'Guest';
+
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert('Você precisa estar logado para acessar essa página!');
+            window.location.href = 'http://localhost:8066/gestao_financeira/index.html';
+        } else {
+            const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+            const expiry = tokenPayload.exp;
+            const now = Math.floor(Date.now() / 1000);
+            if (now >= expiry) {
+                alert('Seu token expirou. Por favor, faça login novamente.');
+                window.location.href = 'http://localhost:8066/gestao_financeira/index.html';
+            }
+        }
     </script>
 </body>
 

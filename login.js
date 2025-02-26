@@ -6,9 +6,17 @@ module.exports = (app, db, bcrypt, jwt) => {
 
         if (user && await bcrypt.compare(password, user.password)) {
             const token = jwt.sign({ email: user.email }, 'secret_key', { expiresIn: '1h' });
-            res.json({failed:false, message: 'Login efetuado com sucesso!', token: token});
+            res.json({
+                failed: false,
+                message: 'Login efetuado com sucesso!',
+                token: token,
+                username: user.username
+            });
         } else {
-            res.json({failed:true, message: 'E-mail e/ou senha inválidos!'});
+            res.json({
+                failed: true,
+                message: 'E-mail e/ou senha inválidos!'
+            });
         }
     });
 };

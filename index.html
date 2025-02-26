@@ -14,7 +14,7 @@
             <input type="password" name="password" placeholder="Senha" required>
             <button type="submit">Entrar</button>
         </form>
-        <a href="http://localhost:8066/register_and_login/cadastro.html">Não possui uma conta? cadastre-se</a>
+        <a href="http://localhost:8066/gestao_financeira/cadastro.html">Não possui uma conta? cadastre-se</a>
     </div>
 
     <script>
@@ -38,6 +38,8 @@
                     if(data.failed == true){
                         alert(data.message);
                     } else {
+                        localStorage.setItem('username', data.username);
+                        localStorage.setItem('token', data.token);
                         alert(data.message);
                         window.location.href = 'http://localhost:8066/gestao_financeira/menu.html';
                     }

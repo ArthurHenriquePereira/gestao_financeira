@@ -10,7 +10,7 @@
     <div class="register-container">
         <h2>Cadastro</h2>
         <form id="registerForm">
-            <input type="text" name="username" placeholder="Usuário" required>
+            <input type="text" id="username" name="username" placeholder="Usuário" required>
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Senha" required>
             <button type="submit">Cadastrar</button>
@@ -21,6 +21,12 @@
         document.getElementById('registerForm').addEventListener('submit', async (e) => {
 
             e.preventDefault();
+            const firstLetter = document.getElementById('username').value.charAt(0)
+            const firstLetterCap = firstLetter.toUpperCase()
+            const remainingLetters = document.getElementById('username').value.slice(1)
+            const capitalizedWord = firstLetterCap + remainingLetters
+            document.getElementById('username').value = capitalizedWord;
+
             const formData = new FormData(e.target);
             const body = Object.fromEntries(formData.entries());
             const response = await fetch('http://localhost:3006/register', {
@@ -33,9 +39,11 @@
             if (response.ok) {
                 if(data.failed == true){
                     alert(data.message);
+                    console.log(data.error);
                 } else {
+                    localStorage.setItem('username', data.username);
                     alert(data.message);
-                    window.location.href = 'http://localhost:8066/register_and_login/menu.html';
+                    window.location.href = 'http://localhost:8066/gestao_financeira/menu.html';
                 }
             }
         });
